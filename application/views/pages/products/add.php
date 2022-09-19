@@ -22,6 +22,11 @@
 										<label for="e_product_name">Product Name</label>
 										<?= form_error('e_product_name', '<span class="text-danger text-sm">', '</span>') ?>
 									</div>
+									<div class="form-floating mb-3">
+										<input class="form-control" id="unit_price" name="unit_price" type="number" placeholder="Unit Price" />
+										<label for="unit_price">Unit Price</label>
+										<?= form_error('unit_price', '<span class="text-danger text-sm">', '</span>') ?>
+									</div>
 									<div class="d-flex align-items-center justify-content-end mt-4 mb-0">
 										<button class="btn btn-primary" type="submit">Submit</button>
 									</div>

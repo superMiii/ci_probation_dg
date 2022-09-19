@@ -23,6 +23,7 @@
                                             <th>#</th>
                                             <th>Product ID</th>
                                             <th>Product Name</th>
+                                            <th>Unit Price</th>
                                             <th>Status</th>
 											<th>Action</th>
                                         </tr>
@@ -34,11 +35,12 @@
 											<th scope="row"><?= $no++ ?></th>
 											<td><?= $p->l_product_id ?></td>
 											<td><?= $p->e_product_name ?></td>
-											<td><span class="<?= ($p->status) ? 'btn btn-success' : 'btn btn-danger' ?> p-2 rounded"><?= ($p->status) ? 'Aktif' : 'Tidak Aktif' ?></span></td>
+											<td><?= 'Rp.' . number_format($p->unit_price,2,',','.') ?></td>
+											<td><span class="<?= ($p->status) ? 'badge bg-success' : 'badge bg-danger' ?> p-2 rounded"><?= ($p->status) ? 'Aktif' : 'Tidak Aktif' ?></span></td>
 											<td>
-												<a href="<?= base_url('products/setStatus/' . $p->id_product) ?>" class="btn btn-primary">
+												<a href="<?= base_url('products/setStatus/' . $p->id_product) ?>" class="badge bg-primary">
 													<?= ($p->status) ? 'Nonaktifkan' : 'Aktifkan' ?>
-												</a> <a href="<?= base_url('products/form_edit/' . $p->id_product) ?>" class="btn btn-warning"><i class="fas fa-pen"></i></a>
+												</a> <a href="<?= base_url('products/form_edit/' . $p->id_product) ?>" class="badge bg-warning"><i class="fas fa-pen"></i></a>
 											</td>
 										</tr>
 									<?php } ?>

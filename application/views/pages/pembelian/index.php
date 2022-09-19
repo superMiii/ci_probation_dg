@@ -53,10 +53,10 @@
 												<td><?= date_format($date,"d M Y") ?></td>
 												<td><?= $th->keterangan ?></td>
 												<td>
-													<a href="<?= base_url('pembelian/detail/' . $th->id_document) ?>" class="btn btn-primary">
+													<a href="<?= base_url('pembelian/detail/' . $th->id_document) ?>" class="badge bg-primary">
 														<i class="fas fa-circle-info"></i>
 													</a>
-													<a href="<?= base_url('pembelian/edit/' . $th->id_document) ?>" class="btn btn-warning">
+													<a href="<?= base_url('pembelian/edit/' . $th->id_document) ?>" class="badge bg-warning">
 														<i class="fas fa-pen"></i>
 													</a>
 												</td>

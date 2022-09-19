@@ -35,7 +35,7 @@
 									</div>
 									<div class="d-flex align-items-center justify-content-end mt-4 mb-0">
 										<button class="btn btn-secondary mx-2 add-item-edit">Add Item</button>
-										<button class="btn btn-secondary mx-2 delete-item">Reset</button>
+										<button class="btn btn-secondary mx-2 reset-item">Reset</button>
 										<!-- <button class="btn btn-primary" type="submit">Submit</button> -->
 									</div>
                             </div>
@@ -50,7 +50,7 @@
 										$subTotal = $trd->v_unit_price * $trd->qty;
 										array_push($total, $subTotal);
 										?>
-										<div class="row item-target">
+										<div class="row item-target<?= $no + 1; ?>">
 											<div class="col-md-1">
 												<?= $no++; ?>
 											</div>
@@ -67,7 +67,7 @@
 													<?= form_error('id_product', '<span class="text-danger text-sm">', '</span>') ?>
 												</div>
 											</div>
-											<div class="col-md-3">
+											<div class="col-md-2">
 												<div class="mb-3">
 													<label for="v_unit_price">Unit Price</label>
 													<input class="form-control" id="v_unit_price<?= $no ?>" name="v_unit_price[]" type="number" onkeyup="hitungSubTotal(<?= $no ?>)" placeholder="unit price" value="<?= $trd->v_unit_price ?>" required />
@@ -87,6 +87,11 @@
 													<input type="number" class="form-control" id="subTotalHarga<?= $no ?>" placeholder="Sub Total Harga" value="<?= $subTotal ?>" readonly required />
 													<input type="hidden" class="form-control" id="jml" value="<?= $no ?>"/>
 													<?= form_error('totalHarga', '<span class="text-danger text-sm">', '</span>') ?>
+												</div>
+											</div>
+											<div class="col-md-1">
+												<div class="mt-4">
+													<span class="btn btn-primary delete-item" onclick="deleteItem(<?= $no; ?>)"><i class="fas fa-trash"></i></span>
 												</div>
 											</div>
 										</div>

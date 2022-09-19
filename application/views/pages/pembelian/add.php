@@ -33,7 +33,7 @@
 									</div>
 									<div class="d-flex align-items-center justify-content-end mt-4 mb-0">
 										<button class="btn btn-secondary mx-2 add-item">Add Item</button>
-										<button class="btn btn-secondary mx-2 delete-item">Reset</button>
+										<button class="btn btn-secondary mx-2 reset-item">Reset</button>
 										<!-- <button class="btn btn-primary" type="submit">Submit</button> -->
 									</div>
 									<input type="hidden" id="jumlah-form" value="1">

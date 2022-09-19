@@ -34,11 +34,11 @@
 											<th scope="row"><?= $no++ ?></th>
 											<td><?= $p->l_supplier_id ?></td>
 											<td><?= $p->e_supplier_name ?></td>
-											<td><span class="<?= ($p->status) ? 'btn btn-success' : 'btn btn-danger' ?> p-2 rounded"><?= ($p->status) ? 'Aktif' : 'Tidak Aktif' ?></span></td>
+											<td><span class="<?= ($p->status) ? 'badge bg-success' : 'badge bg-danger' ?> p-2 rounded"><?= ($p->status) ? 'Aktif' : 'Tidak Aktif' ?></span></td>
 											<td>
-												<a href="<?= base_url('suppliers/setStatus/' . $p->id_supplier) ?>" class="btn btn-primary">
+												<a href="<?= base_url('suppliers/setStatus/' . $p->id_supplier) ?>" class="badge bg-primary">
 													<?= ($p->status) ? 'Nonaktifkan' : 'Aktifkan' ?>
-												</a> <a href="<?= base_url('suppliers/form_edit/' . $p->id_supplier) ?>" class="btn btn-warning"><i class="fas fa-pen"></i></a>
+												</a> <a href="<?= base_url('suppliers/form_edit/' . $p->id_supplier) ?>" class="badge bg-warning"><i class="fas fa-pen"></i></a>
 											</td>
 										</tr>
 									<?php } ?>

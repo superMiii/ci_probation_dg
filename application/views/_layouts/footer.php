@@ -23,6 +23,7 @@
         <script src="<?= base_url() ?>assets/dist/js/select2.min.js"></script>
 
 		<script>
+			let jumlah = parseInt($('#jumlah-form').val());
 			$(document).ready(function(){
 				<?php if ($this->uri->segment(2) != 'edit') { ?>
 				<?php } ?>
@@ -30,14 +31,14 @@
 				$('#totalHarga').hide();
 				$('#labelTotalHarga').hide();
 	
-				let jumlah = parseInt($('#jumlah-form').val());
 
 				$('.add-item').click((e) => {
 					e.preventDefault();
 					let html = '';
 					html += `
-					<div class="row item-target">
+					<div class="row item-target${jumlah}">
 						<div class="col-md-1">
+							<div class="mt-4"></div>
 							${jumlah}
 						</div>
 						<div class="col-md-3">
@@ -52,7 +53,7 @@
 								<?= form_error('id_product', '<span class="text-danger text-sm">', '</span>') ?>
 							</div>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<div class="mb-3">
 								<label for="v_unit_price">Unit Price</label>
 								<input class="form-control" id="v_unit_price${jumlah}" name="v_unit_price[]" type="number" onkeyup="hitungSubTotal(${jumlah})" placeholder="unit price" required />
@@ -74,6 +75,11 @@
 								<?= form_error('totalHarga', '<span class="text-danger text-sm">', '</span>') ?>
 							</div>
 						</div>
+						<div class="col-md-1">
+							<div class="mt-4">
+								<span class="btn btn-primary delete-item" onclick="deleteItem(${jumlah})"><i class="fas fa-trash"></i></span>
+							</div>
+						</div>
 					</div>
 					`;
 					
@@ -90,7 +96,7 @@
 					jumlah += 1;
 					let html = '';
 					html += `
-					<div class="row item-target">
+					<div class="row item-target${jumlah}">
 						<div class="col-md-1">
 							${jumlah-1}
 						</div>
@@ -106,7 +112,7 @@
 								<?= form_error('id_product', '<span class="text-danger text-sm">', '</span>') ?>
 							</div>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<div class="mb-3">
 								<label for="v_unit_price">Unit Price</label>
 								<input class="form-control" id="v_unit_price${jumlah}" name="v_unit_price2[]" type="number" onkeyup="hitungSubTotal(${jumlah})" placeholder="unit price" required />
@@ -128,6 +134,11 @@
 								<?= form_error('totalHarga', '<span class="text-danger text-sm">', '</span>') ?>
 							</div>
 						</div>
+						<div class="col-md-1">
+							<div class="mt-4">
+								<span class="btn btn-primary delete-item" onclick="deleteItem(${jumlah})"><i class="fas fa-trash"></i></span>
+							</div>
+						</div>
 					</div>
 					`;
 					$('#form-add-item').append(html);
@@ -137,16 +148,21 @@
 					$('#totalHarga').show();
 					$('#labelTotalHarga').show();
 				})
-				$('.delete-item').click((e) => {
+				$('.reset-item').click((e) => {
 					e.preventDefault();
 					$("#form-add-item").html("");
-      				$("#jumlah-form").val("1");
+      				jumlah = 1;
 					$('.submit').hide();
 					$('#totalHarga').hide();
 					$('#labelTotalHarga').hide();
 				})
 				$('.js-example-basic-single').select2();
 			})
+			const deleteItem = (hitung) => {
+				$(`.item-target${hitung}`).remove();
+				// jumlah -= 1;
+				console.log(hitung)
+			}
 			const hitungTotal = () => {
 				let jumlah = $('#jml').val();
 				let total = 0;
