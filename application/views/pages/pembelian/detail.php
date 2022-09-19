@@ -59,8 +59,8 @@
 											<td><strong><?= 'Rp.' . number_format($totalHarga,2,',','.') ?></strong></td>
 										</tr>
 										<tr>
-											<td colspan="2" class="text-end"><strong>Terbilang</strong></td>
-											<td colspan="3"><strong><em><?= terbilang($totalHarga) ?></strong></em></td>
+											<td colspan="4" class="text-end"><strong>Terbilang</strong></td>
+											<td><strong><em><?= terbilang($totalHarga) ?></strong></em></td>
 										</tr>
                                     </tbody>
                                 </table>
