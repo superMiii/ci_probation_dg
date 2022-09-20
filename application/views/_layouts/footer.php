@@ -37,9 +37,8 @@
 					let html = '';
 					html += `
 					<div class="row item-target${jumlah}">
-						<div class="col-md-1">
-							<div class="mt-4"></div>
-							${jumlah}
+						<div class="col-md-1 no-urut">
+							<span class="norut">${jumlah}</span>
 						</div>
 						<div class="col-md-3">
 							<div class="mb-3">
@@ -97,8 +96,8 @@
 					let html = '';
 					html += `
 					<div class="row item-target${jumlah}">
-						<div class="col-md-1">
-							${jumlah-1}
+						<div class="col-md-1 no-urut">
+							<span class="norut">${jumlah-1}</span>
 						</div>
 						<div class="col-md-3">
 							<div class="mb-3">
@@ -136,7 +135,7 @@
 						</div>
 						<div class="col-md-1">
 							<div class="mt-4">
-								<span class="btn btn-primary delete-item" onclick="deleteItem(${jumlah})"><i class="fas fa-trash"></i></span>
+								<span class="btn btn-primary delete-item" onclick="deleteItem(${jumlah-1})"><i class="fas fa-trash"></i></span>
 							</div>
 						</div>
 					</div>
@@ -156,12 +155,27 @@
 					$('#totalHarga').hide();
 					$('#labelTotalHarga').hide();
 				})
+				$('.js-example-basic-single2').select2();
 				$('.js-example-basic-single').select2();
 			})
 			const deleteItem = (hitung) => {
 				$(`.item-target${hitung}`).remove();
 				// jumlah -= 1;
-				console.log(hitung)
+				resetNomor(hitung);
+				hitungTotal();
+			}
+			const resetNomor = (hitung) => {
+				// hitung = hitung + 1
+				let simpan = [];
+				$('.no-urut').each((i) => {
+					// console.log(i+1);
+					simpan.push(i+1);
+					// $(`.norut`).addClass(i);
+				})
+				simpan.map((sim) => {
+					console.log($(`.${sim}`));
+					$(`.${sim}`).text(sim);
+				})
 			}
 			const hitungTotal = () => {
 				let jumlah = $('#jml').val();

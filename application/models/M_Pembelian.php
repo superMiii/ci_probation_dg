@@ -66,8 +66,9 @@ class M_Pembelian extends CI_Model
 	{
 		$this->db->insert_batch('tr_detail', $data);
 	}
-	public function updateDataItem($data)
+	public function updateDataItem($data, $id)
 	{
+		$this->db->where('id_document', $id);
 		$this->db->update_batch('tr_detail', $data, 'id_item');
 	}
 }

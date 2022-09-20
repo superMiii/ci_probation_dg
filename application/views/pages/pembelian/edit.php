@@ -96,7 +96,7 @@
 											</div>
 										</div>
 									<?php } ?>
-									<p class="text-end">Prev Total : <?= 'Rp.' . number_format(array_sum($total),2,',','.'); ?></p>
+									<!-- <p class="text-end">Prev Total : <?= 'Rp.' . number_format(array_sum($total),2,',','.'); ?></p> -->
 									<div id="form-add-item"></div>
 								</div>
 								<div class="card-footer">
