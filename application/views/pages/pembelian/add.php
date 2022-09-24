@@ -44,8 +44,10 @@
 									<i class="fas fa-table me-1"></i>
 									Form Add Item
 								</div>
-								<div class="card-body" id="form-add-item">
-									
+								<div class="card-body">
+									<table id="form-add-item" style="width: 100%;">
+
+									</table>
 								</div>
 								<div class="card-footer">
 									<div class="d-flex flex-column align-items-end justify-content-center mb-0">

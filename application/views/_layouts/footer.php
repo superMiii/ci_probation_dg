@@ -36,50 +36,40 @@
 					e.preventDefault();
 					let html = '';
 					html += `
-					<div class="row item-target${jumlah}">
-						<div class="col-md-1 no-urut">
-							<span class="norut">${jumlah}</span>
-						</div>
-						<div class="col-md-3">
-							<div class="mb-3">
-								<label for="id_product">Product Name</label>
-								<select class="form-select js-example-basic-single2" name="id_product[]" id="id_product${jumlah}" aria-label="Default select example" required>
-									<option disabled selected>Select product</option>
-									<?php foreach($products as $p) { ?>
-										<option value="<?= $p->id_product ?>"><?= $p->e_product_name ?></option>
-									<?php } ?>
-								</select>
-								<?= form_error('id_product', '<span class="text-danger text-sm">', '</span>') ?>
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="mb-3">
-								<label for="v_unit_price">Unit Price</label>
-								<input class="form-control" id="v_unit_price${jumlah}" name="v_unit_price[]" type="number" onkeyup="hitungSubTotal(${jumlah})" placeholder="unit price" required />
-								<?= form_error('v_unit_price', '<span class="text-danger text-sm">', '</span>') ?>
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="mb-3">
-								<label for="qty">Qty</label>
-								<input type="number" class="form-control" id="qty${jumlah}" onkeyup="hitungSubTotal(${jumlah})" name="qty[]" placeholder="qty" required />
-								<?= form_error('qty', '<span class="text-danger text-sm">', '</span>') ?>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="mb-3">
-								<label for="subTotalHarga">Sub Total Harga</label>
-								<input type="number" class="form-control" id="subTotalHarga${jumlah}" placeholder="Sub Total Harga" readonly required />
-								<input type="hidden" class="form-control" id="jml" value="${jumlah}"/>
-								<?= form_error('totalHarga', '<span class="text-danger text-sm">', '</span>') ?>
-							</div>
-						</div>
-						<div class="col-md-1">
-							<div class="mt-4">
-								<span class="btn btn-primary delete-item" onclick="deleteItem(${jumlah})"><i class="fas fa-trash"></i></span>
-							</div>
-						</div>
-					</div>
+					<tr class="item-target${jumlah}">
+						<td>
+							<spanx id="${jumlah}">${jumlah}</spanx>
+						</td>
+						<td>
+							<label for="id_product">Product Name</label>
+							<select class="form-select js-example-basic-single2" style="width:100%" name="id_product[]" id="id_product${jumlah}" aria-label="Default select example" required>
+								<option disabled selected>Select product</option>
+								<?php foreach($products as $p) { ?>
+									<option value="<?= $p->id_product ?>"><?= $p->e_product_name ?></option>
+								<?php } ?>
+							</select>
+							<?= form_error('id_product', '<span class="text-danger text-sm">', '</span>') ?>
+						</td>
+						<td>
+							<label for="v_unit_price">Unit Price</label>
+							<input class="form-control" id="v_unit_price${jumlah}" name="v_unit_price[]" type="number" onkeyup="hitungSubTotal(${jumlah})" placeholder="unit price" required />
+							<?= form_error('v_unit_price', '<span class="text-danger text-sm">', '</span>') ?>
+						</td>
+						<td>
+							<label for="qty">Qty</label>
+							<input type="number" class="form-control" id="qty${jumlah}" onkeyup="hitungSubTotal(${jumlah})" name="qty[]" placeholder="qty" required />
+							<?= form_error('qty', '<span class="text-danger text-sm">', '</span>') ?>
+						</td>
+						<td>
+							<label for="subTotalHarga">Sub Total Harga</label>
+							<input type="number" class="form-control" id="subTotalHarga${jumlah}" placeholder="Sub Total Harga" readonly required />
+							<input type="hidden" class="form-control" id="jml" value="${jumlah}"/>
+							<?= form_error('totalHarga', '<span class="text-danger text-sm">', '</span>') ?>
+						</td>
+						<td>
+							<span class="btn btn-primary delete-item"><i class="fas fa-trash"></i></span>
+						</td>
+					</tr>
 					`;
 					
 					$('#form-add-item').append(html);
@@ -97,7 +87,7 @@
 					html += `
 					<div class="row item-target${jumlah}">
 						<div class="col-md-1 no-urut">
-							<span class="norut">${jumlah-1}</span>
+							<span id="${jumlah-1}">${jumlah-1}</span>
 						</div>
 						<div class="col-md-3">
 							<div class="mb-3">
@@ -135,7 +125,7 @@
 						</div>
 						<div class="col-md-1">
 							<div class="mt-4">
-								<span class="btn btn-primary delete-item" onclick="deleteItem(${jumlah-1})"><i class="fas fa-trash"></i></span>
+								<span class="btn btn-primary delete-item"><i class="fas fa-trash"></i></span>
 							</div>
 						</div>
 					</div>
@@ -155,28 +145,38 @@
 					$('#totalHarga').hide();
 					$('#labelTotalHarga').hide();
 				})
+				$("#form-add-item").on("click", ".delete-item", function(event) {
+					$(this).closest("tr").remove();
+
+					var obj = $('#form-add-item tr:visible').find('spanx');
+					$.each(obj, function(key, value) {
+						console.log(value.id);
+						id = value.id;
+						$('#' + id).html(key + 1);
+					});
+				});
 				$('.js-example-basic-single2').select2();
 				$('.js-example-basic-single').select2();
 			})
 			const deleteItem = (hitung) => {
 				$(`.item-target${hitung}`).remove();
 				// jumlah -= 1;
-				resetNomor(hitung);
+				// resetNomor(hitung);
 				hitungTotal();
 			}
-			const resetNomor = (hitung) => {
-				// hitung = hitung + 1
-				let simpan = [];
-				$('.no-urut').each((i) => {
-					// console.log(i+1);
-					simpan.push(i+1);
-					// $(`.norut`).addClass(i);
-				})
-				simpan.map((sim) => {
-					console.log($(`.${sim}`));
-					$(`.${sim}`).text(sim);
-				})
-			}
+			// const resetNomor = (hitung) => {
+			// 	// hitung = hitung + 1
+			// 	let simpan = [];
+			// 	$('.no-urut').each((i) => {
+			// 		// console.log(i+1);
+			// 		simpan.push(i+1);
+			// 		// $(`.norut`).addClass(i);
+			// 	})
+			// 	simpan.map((sim) => {
+			// 		console.log($(`.${sim}`));
+			// 		$(`.${sim}`).text(sim);
+			// 	})
+			// }
 			const hitungTotal = () => {
 				let jumlah = $('#jml').val();
 				let total = 0;
